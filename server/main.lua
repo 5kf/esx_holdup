@@ -101,3 +101,42 @@ AddEventHandler('esx_holdup:robberyStarted', function(currentStore)
 		end
 	end
 end)
+-----------------------------------------------
+--- Overval succes
+-----------------------------------------------
+RegisterServerEvent('esx_holdup:succes')
+AddEventHandler('esx_holdup:succes', function(award, naam)
+	local webhook = "YOUR-WEBHOOK"
+	local DATE = os.date(" %H:%M %d.%m.%y")
+    local discordInfo = {
+        ["color"] = "1708645",
+        ["type"] = "rich",
+        ["author"] = {                    
+            name = "Oasis | Roleplay",
+            icon_url = "https://media.discordapp.net/attachments/843606318878294056/861297876189446174/OASIS_LOGO.png?width=646&height=646"
+        },
+        ["title"] = "[Overval gelukt]",
+        ["description"] = "**Steam :**  "..naam.." \n **Zwart geld :**  "..award.." \n **Tijd :**  "..DATE..""
+    }
+    PerformHttpRequest(""..webhook.."", function(err, text, headers) end, 'POST', json.encode({ username = 'Oasis | Logs', embeds = { discordInfo } }), { ['Content-Type'] = 'application/json' })
+end)
+
+-----------------------------------------------
+--- Overval gestart
+-----------------------------------------------
+RegisterServerEvent('esx_holdup:gestart')
+AddEventHandler('esx_holdup:gestart', function(naam, winkel)
+	local webhook = "YOUR-WEBHOOK"
+	local DATE = os.date(" %H:%M %d.%m.%y")
+    local discordInfo = {
+        ["color"] = "1708645",
+        ["type"] = "rich",
+        ["author"] = {                    
+            name = "Oasis | Roleplay",
+            icon_url = "https://media.discordapp.net/attachments/843606318878294056/861297876189446174/OASIS_LOGO.png?width=646&height=646"
+        },
+        ["title"] = "[Overval gestart]",
+        ["description"] = "**Steam :**  "..naam.." \n **Locatie :**  "..winkel.." \n **Tijd :**  "..DATE..""
+    }
+    PerformHttpRequest(""..webhook.."", function(err, text, headers) end, 'POST', json.encode({ username = 'Oasis | Logs', embeds = { discordInfo } }), { ['Content-Type'] = 'application/json' })
+end)

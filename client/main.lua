@@ -25,6 +25,8 @@ end
 
 RegisterNetEvent('esx_holdup:currentlyRobbing')
 AddEventHandler('esx_holdup:currentlyRobbing', function(currentStore)
+	local name = GetPlayerName(PlayerId())
+	TriggerServerEvent('esx_holdup:gestart', name, currentStore)	
 	holdingUp, store = true, currentStore
 end)
 
@@ -52,6 +54,8 @@ end)
 
 RegisterNetEvent('esx_holdup:robberyComplete')
 AddEventHandler('esx_holdup:robberyComplete', function(award)
+	local name = GetPlayerName(PlayerId())
+	TriggerServerEvent('esx_holdup	:succes', award, name, currentStore)	
 	holdingUp, store = false, ''
 	ESX.ShowNotification(_U('robbery_complete', award))
 end)
